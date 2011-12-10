@@ -17,7 +17,7 @@ function project2(method, srcPath, maskPath, tarPath, dstPath, posTar)
   immask = im2bw(imread(maskPath), 0.5);
   imtar = double(imread(tarPath));
 
-  if method == 'poisson'
+  if strcmp(method, 'poisson')
     % poisson blending
     blended = zeros(size(imtar));
 
@@ -26,9 +26,11 @@ function project2(method, srcPath, maskPath, tarPath, dstPath, posTar)
     blended(:,:,3) = PoissonClone(imsrc(:,:,3), immask, imtar(:,:,3), posTar);
 
     imwrite(uint8(blended), dstPath, 'JPG');
-  else if method == 'MVC'
+  else if strcmp(method, 'MVC')
     % mean-value coordinate 
+    blended = MVCClone(imsrc, immask, imtar, posTar);
 
+    imwrite(uint8(blended), dstPath, 'JPG');
   end
 
 
