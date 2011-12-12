@@ -25,12 +25,13 @@ function [imDst] = MVCClone(imSrc, imMask, imTar, offset)
 
   % Find the boundary of mask
   [bound label] = bwboundaries(imMask, 'noholes');
-  % P: 2*m matrix indicates m boundary points
-  P = bound{1}';
+  % P: a 2*m matrix indicates m boundary points [x;y]
+  P = fliplr(flipud(bound{1}'));
   m = size(P, 2);
   clear bound, label;
 
   coord = zeros(y_max, x_max, m);
+  clamp = @(v)max(min(v,1),-1);
 
   % Preprocessing stage
   % Compute the mean-value coordinate for each selected pixel in source image
@@ -40,43 +41,39 @@ function [imDst] = MVCClone(imSrc, imMask, imTar, offset)
         continue;
       end
 
-      Prel = P - repmat([y;x], [1 m]);
+      Prel = P - repmat([x;y], [1 m]);
       r = zeros(1, m);
-      A = zeros(1, m);
-      B = zeros(1, m);
 
-      % Compute distance from (y,x) to each boundary vertex
+      % Compute distance from (x,y) to each boundary vertex
       for i = 1:m
         r(i) = norm(Prel(:, i));
       end
 
-      % Compute numerator of equation (2)
-      left = cross([Prel; zeros(1, m)], [Prel(:, 2:end), Prel(:, 1); zeros(1, m)]);
-      A(:) = left(3, :) / 2;
-      right = cross([Prel(:, end), Prel(:, 1:end-1); zeros(1, m)], [Prel(:, 2:end), Prel(:, 1); zeros(1, m)]);
-      B(:) = right(3, :) / 2;
-      clear left, right;
+      theta = acos(clamp(dot(circshift(Prel, [0 1]), Prel) ./ (circshift(r, [0 1]) .* r)));
+      w = (tan(theta/2) + tan(circshift(theta, [0 -1])/2)) ./ r;
 
-      % Compute mean-value coordinate of (y, x)
-      coord(y, x, :) = [(r(end)*A(1)-r(1)*B(1)+r(2)*A(end))/(A(end)*A(1)), ... % elem #1
-                        (r(1:end-2).*A(2:end-1)-r(2:end-1).*B(2:end-1)+r(3:end).*A(1:end-2))./(A(1:end-2).*A(2:end-1)),... % elem #2 to #end-1
-                        (r(end-1)*A(end)-r(end)*B(end)+r(1)*A(end-1))/(A(end-1)*A(end))]; % last elem
+      coord(y, x, :) = w / sum(w);
 
-      coord(y, x, :) = coord(y, x, :) / sum(coord(y, x, :));
+      clear Prel; clear r; clear theta; clear w;
+
     end
   end
   
   % Compute the difference along the boundary
   diff = zeros(m, ch);
   for p = 1:m
-    diff(p, :) = imTar(P(1,p), P(2,p), :) - imSrc(P(1,p), P(2,p), :);
+    diff(p, :) = imTar(P(2,p), P(1,p), :) - imSrc(P(2,p), P(1,p), :);
   end
 
   imDst = imTar;
   for y = y_min:y_max
     for x = x_min:x_max
       if imMask(y, x) == 1
-        % Evaluate the mean-value interpolant at (y, x)
+        if imMask(y-1, x-1) == 0 || imMask(y-1, x) == 0 || imMask(y-1, x+1) == 0 || imMask(y, x-1) == 0 || imMask(y, x+1) == 0 || imMask(y+1, x-1) == 0 || imMask(y+1, x) == 0 || imMask(y+1, x+1) == 0
+          continue;
+        end
+
+        % Evaluate the mean-value interpolant at (x, y)
         for i = 1:ch
           imDst(offset(2) + (y-y_min), offset(1) + (x-x_min), i) = imSrc(y, x, i) + sum(reshape(coord(y, x, :), m,1).*diff(:, i));
         end

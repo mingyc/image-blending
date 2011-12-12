@@ -33,5 +33,6 @@ function project2(method, srcPath, maskPath, tarPath, dstPath, posTar)
     imwrite(uint8(blended), dstPath, 'JPG');
   end
 
+  clear all;
 
 end
