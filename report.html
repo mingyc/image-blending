@@ -10,7 +10,7 @@
 
     <header>
     <h1><a href="http://www.csie.ntu.edu.tw/~cyy/courses/comphoto/11fall/overview/">Computational Photography, Fall 2011</a></h1>
-    <h2><a href="http://www.csie.ntu.edu.tw/~cyy/courses/comphoto/11fall/assignments/proj12">Project #2: Image Blending</a></h2>
+    <h2><a href="http://www.csie.ntu.edu.tw/~cyy/courses/comphoto/11fall/assignments/proj2">Project #2: Image Blending</a></h2>
     <div id="timestamp">
       <p id="submit_time">
       Date Submitted: 12 Dec 2011
@@ -32,7 +32,7 @@
       <div class="quote">
         Image blending composites a selected image region into a target image seamlessly. In this project, you are asked to implement two image blending methods: Poisson blending [1] and Coordinate instant cloning [2]. For the first method, you will need to implement a Poisson solver. You can find example codes for Poisson solver from this website. You might need to modify them for your project though. For the second method, you only need to implement the baseline method without speeding up using adaptive meshes. You can work in a team of two students for this project. 
         <div class="courtesy">
-          --&nbsp;Courtesy of <a href="http://www.csie.ntu.edu.tw/~cyy/courses/comphoto/11fall/assignments/proj1/">Course Website</a>
+          --&nbsp;Courtesy of <a href="http://www.csie.ntu.edu.tw/~cyy/courses/comphoto/11fall/assignments/proj2/">Course Website</a>
         </div> 
       </div>
       </p>
@@ -47,7 +47,16 @@
       </p>
       <span>Concept: Mean-Value Coordinate Blending</span>
       <p>
-      </p>
+		We got 3 inputs: the source image P, the image P's mask (where we can get the edge ∂P), and the target image<p>
+		In this algorithm, we compute the MVC of each pixel in P with respect to ∂P.<br>
+		The Mean-Value interpolant depends on the difference between the edge and the point in gragh.<p>
+		Culculating a point x's MVC coordinates:<br>
+		<img src="result/MVC.jpg"> 
+		<p>
+		The complete algorithm of MVC Cloning:<br>
+		<img src="result/MVC_Cloning.jpg">
+		</p>
+	  </p>
       <span>Result</span>
       <p>
       There is still some bugs in our MVC cloning, thus the results are quit strange.
@@ -74,6 +83,13 @@
         　　<td><img src="img/tar_img02.jpg" width="300" height="225"></td>
         　　<td><img src="img/dst_img02_poisson.jpg" width="300" height="225"></td>
         　　<td><img src="img/dst_img02_mvc.jpg" width="300" height="225"></td>
+        </tr>
+		<tr>
+        　  <td align="center"><img src="img/src_img05.jpg"></td>
+        　　<td align="center"><img src="img/mask_img05.jpg"></td>
+        　　<td><img src="img/tar_img05.jpg" width="300" height="225"></td>
+        　　<td><img src="img/dst_img05_poisson.jpg" width="300" height="225"></td>
+        　　<td><img src="img/dst_img05_mvc.jpg" width="300" height="225"></td>
         </tr>
     </table>
     </p>
