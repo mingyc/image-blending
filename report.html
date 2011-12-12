@@ -1,74 +1,96 @@
-<HTML>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Project #2 - Image Blending, Computational Photography Fall 2011, NTU</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="Ming-Ying Chung, Feng-Cheng Su">
+    <link rel="stylesheet" href="static/project2.css" type="text/css">
+  </head>
+  <body>
 
-<HEAD>
-<TITLE>ComPhoto Project 2 Report</TITLE> 
-</HEAD>
+    <header>
+    <h1><a href="http://www.csie.ntu.edu.tw/~cyy/courses/comphoto/11fall/overview/">Computational Photography, Fall 2011</a></h1>
+    <h2><a href="http://www.csie.ntu.edu.tw/~cyy/courses/comphoto/11fall/assignments/proj12">Project #2: Image Blending</a></h2>
+    <div id="timestamp">
+      <p id="submit_time">
+      Date Submitted: 12 Dec 2011
+      </p>
+      <p id="email_time">
+      Code Emailed: 12 Dec 2011
+      </p>
+    </div>
+    <div id="author">
+      b97902037 é¾æ˜ç© (Ming-Ying Chung) <br/>
+      b97902090 è˜‡è±æˆ (Feng-Cheng Su)
+    </div>
+    </header>
 
-<BODY topmargin="20" leftmargin="20">
-<H1>Comphoto Project 2 Report</H1>
-<FONT SIZE=3><P ALIGN=RIGHT>B97902037 Áé©ú¿o<BR> 
-                            B97902090 Ä¬Â×¦¨</P></FONT><BR>
+    <section id="main_content">
+    <div id="description">
+      <h2><span>Project Description</span></h2>
+      <p>
+      <div class="quote">
+        Image blending composites a selected image region into a target image seamlessly. In this project, you are asked to implement two image blending methods: Poisson blending [1] and Coordinate instant cloning [2]. For the first method, you will need to implement a Poisson solver. You can find example codes for Poisson solver from this website. You might need to modify them for your project though. For the second method, you only need to implement the baseline method without speeding up using adaptive meshes. You can work in a team of two students for this project. 
+        <div class="courtesy">
+          --&nbsp;Courtesy of <a href="http://www.csie.ntu.edu.tw/~cyy/courses/comphoto/11fall/assignments/proj1/">Course Website</a>
+        </div> 
+      </div>
+      </p>
+      <p>
+      In this assignment we use <b>matlab</b> to implement the required algorithm: Poisson Blending & MVC Cloning.
+      </p>
+    </div>
+    <div id="mvc">
+      <h2><span>Image Blending</span></h2>
+      <span>Concept: Poisson Blending</span>
+      <p>
+      </p>
+      <span>Concept: Mean-Value Coordinate Blending</span>
+      <p>
+      </p>
+      <span>Result</span>
+      <p>
+      There is still some bugs in our MVC cloning, thus the results are quit strange.
+      </p>
+      <p>
+    <table border="1">
+      ã€€<tr>
+        ã€€ã€€<th>source</th>
+        ã€€ã€€<th>mask</th>
+            <th>target</th>
+            <th>Poisson</th>
+            <th>MVC</th>
+        </tr>
+      ã€€<tr>
+        ã€€ã€€<td><img src="img/src_img01.jpg" width="300" height="225"></td>
+        ã€€ã€€<td><img src="img/mask_img01.jpg" width="300" height="225"></td>
+        ã€€ã€€<td><img src="img/tar_img01.jpg" width="300" height="225"></td>
+        ã€€ã€€<td><img src="img/dst_img01_poisson.jpg" width="300" height="225"></td>
+        ã€€ã€€<td><img src="img/dst_img01_mvc.jpg" width="300" height="225"></td>
+        </tr>
+        <tr>
+        ã€€  <td><img src="img/src_img02.jpg" width="300" height="225"></td>
+        ã€€ã€€<td><img src="img/mask_img02.jpg" width="300" height="225"></td>
+        ã€€ã€€<td><img src="img/tar_img02.jpg" width="300" height="225"></td>
+        ã€€ã€€<td><img src="img/dst_img02_poisson.jpg" width="300" height="225"></td>
+        ã€€ã€€<td><img src="img/dst_img02_mvc.jpg" width="300" height="225"></td>
+        </tr>
+    </table>
+    </p>
 
-<P>
-<H1>1. Poisson Blending</H1>
-¿é¤J¡G<BR>
-§Q¥Î¨Ï¥ÎªÌµ¹©wªº3­Óinput(source, mask, target)¡A±o¨ì³Ì«áªºµ²ªG<br>
-mask¨Ì¾Ú¨Ï¥ÎªÌµ¹©wªº½d³ò¡A§@¬°source­n³Q¶K¤Wªº½d³ò¡C<BR>
+    </div>
+    <div id="reference">
+      <h2><span>Reference</span></h2>
+      <ul>
+        <li>[1] P. Perez, M. Gangnet, Poisson Image Editing, ACM SIGGAPH 2003.</li>
+        <li>[2] Z. Farbman, G. Hoffer, Y. Lipman, D. Cohen-Or, D. Lischinski, Coordinates for Instant Image Cloning, ACM SIGGAPH 2009.</li>
+      </ul>
+    </div>
+    </section>
+    <footer>
+    &copy; 2011 Ming-Ying Chung, Feng-Cheng Su. All Rights Reserved.
+    </footer>
+  </body>
+</html>
 
-<table border="1" width="600" height="300" >
-¡@<tr>
-¡@¡@<th>source</th>
-¡@¡@<th>mask</th>
-¡@</tr>
-¡@<tr>
-¡@¡@<td><IMG SRC="img/src_img01.jpg" width="300" height="225"></td>
-¡@¡@<td><IMG SRC="img/mask_img01.jpg" width="300" height="225"></td>
-¡@</tr>
-  <tr>
-  ¡@<td><IMG SRC="img/src_img02.jpg"></td>
-¡@¡@<td><IMG SRC="img/mask_img02.jpg"></td>
-  </tr>
-  <tr>
-  ¡@<td><IMG SRC="img/src_img03.jpg" height="225"></td>
-¡@¡@<td><IMG SRC="img/mask_img03.jpg" height="225"></td>
-  </tr>
-   <tr>
-  ¡@<td><IMG SRC="img/src_img04.jpg"></td>
-¡@¡@<td><IMG SRC="img/mask_img04.jpg"></td>
-  </tr>
-     <tr>
-  ¡@<td><IMG SRC="img/src_img05.jpg"></td>
-¡@¡@<td><IMG SRC="img/mask_img05.jpg"></td>
-  </tr>
-</table><P>
 
-¥H¤U¬°±o¨ìªº´X­Óµ²ªG¡G<BR>
-
-<table border=1>
-¡@<tr>
-¡@¡@<th>target</th>
-¡@¡@<th>result</th>
-¡@</tr>
-¡@<tr>
-¡@¡@<td><IMG SRC="img/tar_img01.jpg" width="307" height="230"></td>
-¡@¡@<td><IMG SRC="img/dst_img01.jpg" width="307" height="230"></td>
-¡@</tr>
-¡@<tr>
-¡@¡@<td><IMG SRC="img/tar_img02.jpg"></td>
-¡@¡@<td><IMG SRC="img/dst_img02.jpg"></td>
-¡@</tr>
-¡@<tr>
-¡@¡@<td><IMG SRC="img/tar_img05.jpg"></td>
-¡@¡@<td><IMG SRC="img/dst_img03.jpg"></td>
-¡@</tr>
-</table>
-
-<P>
-<H1>2. Mean-Value Coordinates Cloning</H1>
-</P>
-
-</BODY>
-
-</HTML>
-
-	

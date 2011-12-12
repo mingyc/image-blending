@@ -1,0 +1,84 @@
+html, body {
+  font-family: verdana, helvetica, tahoma, sans-serif;
+}
+
+/*-- [HEADER] ------------ */
+header {
+  text-align: center;
+}
+#timestamp {
+  text-align: right;
+  line-height: 20%;
+  font-weight: normal;
+  font-family: "Times New Roman";
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+
+}
+#author {
+  text-align: right;
+  font-weight: bold;
+}
+
+
+/*-- [SECTION TITLE] ------------ */
+#main_content h2 {
+  padding-left: 30px;
+  border-bottom: 1px solid #000;
+}
+#main_content h2 span {
+  border-bottom: 0.2em solid #000;
+}
+
+
+/*-- [CONTENT] ------------ */
+.quote {
+  background-color: #DCE0E0;
+  font-style: italic;
+  font-family: "Times New Roman";
+}
+.quote .courtesy {
+  text-align: right;
+}
+#main_content div span {
+  border-bottom: 0.2em solid #000;
+  font-weight: bold;
+}
+.equation {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+img.equation {
+  width: 30%;
+}
+img.small {
+  width: 15%;
+}
+img.symbol {
+  height: 15px;
+}
+div.equation {
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+}
+code {
+  display: block;
+  margin: 5px auto 5px auto;
+}
+
+
+
+/*-- [MAIN UI] ------*/
+.image_button_mouseout {
+
+}
+.image_button_mouseover {
+  border: 1px solid #CC0066;
+}
+
+/*-- [FOOTER] ------------ */
+footer {
+  text-align: center;
+}
