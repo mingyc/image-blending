@@ -44,52 +44,60 @@
       <h2><span>Image Blending</span></h2>
       <span>Concept: Poisson Blending</span>
       <p>
+        The key concept is to solve the following optimization:<br/>
+        <div class="equation"><img src="static/poisson-eq3.jpg"/></div>
+        <div class="equation"><img src="static/poisson-eq4.jpg"/></div>
+        which means let the gradient of final image be close to the gradient of source image with the constraint that the region of target image must be the
+        same as the region of source image.
       </p>
       <span>Concept: Mean-Value Coordinate Blending</span>
       <p>
-		We got 3 inputs: the source image P, the image P's mask (where we can get the edge ∂P), and the target image<p>
-		In this algorithm, we compute the MVC of each pixel in P with respect to ∂P.<br>
-		The Mean-Value interpolant depends on the difference between the edge and the point in P.<p>
-		Culculating a point x's MVC coordinates:<br>
-		<img src="result/MVC.jpg"> 
-		<p>
-		The complete algorithm of MVC Cloning:<br>
-		<img src="result/MVC_Cloning.jpg">
-		</p>
-	  </p>
+        We got 3 inputs: the source image P, the image P's mask (where we can get the edge <img class="symbol" src="static/gradP.jpg" />), 
+        and the target image
+      </p>
+      <p>
+        In this algorithm, we compute the MVC of each pixel in P with respect to <img class="symbol" src="static/gradP.jpg" />.<br/>
+        The Mean-Value interpolant depends on the difference between the edge and the point in P.
+      </p>
+      <p>
+        Culculating a point x's MVC coordinates:<br/>
+        <div class="equation"><img src="static/MVC.jpg" /> </div>
+        The complete algorithm of MVC Cloning:<br/>
+        <div class="equation"><img src="static/MVC_Cloning.jpg" /></div>
+      </p>
       <span>Result</span>
       <p>
       There is still some bugs in our MVC cloning, thus the results are quit strange.
       </p>
       <p>
     <table border="1">
-      　<tr>
-        　　<th>source</th>
-        　　<th>mask</th>
+        <tr>
+            <th>source</th>
+            <th>mask</th>
             <th>target</th>
             <th>Poisson</th>
             <th>MVC</th>
         </tr>
-      　<tr>
-        　　<td><img src="img/src_img01.jpg" width="300" height="225"></td>
-        　　<td><img src="img/mask_img01.jpg" width="300" height="225"></td>
-        　　<td><img src="img/tar_img01.jpg" width="300" height="225"></td>
-        　　<td><img src="img/dst_img01_poisson.jpg" width="300" height="225"></td>
-        　　<td><img src="img/dst_img01_mvc.jpg" width="300" height="225"></td>
+        <tr>
+            <td><img src="img/src_img01.jpg" width="300" height="225"></td>
+            <td><img src="img/mask_img01.jpg" width="300" height="225"></td>
+            <td><img src="img/tar_img01.jpg" width="300" height="225"></td>
+            <td><img src="img/dst_img01_poisson.jpg" width="300" height="225"></td>
+            <td><img src="img/dst_img01_mvc.jpg" width="300" height="225"></td>
         </tr>
         <tr>
-        　  <td><img src="img/src_img02.jpg" width="300" height="225"></td>
-        　　<td><img src="img/mask_img02.jpg" width="300" height="225"></td>
-        　　<td><img src="img/tar_img02.jpg" width="300" height="225"></td>
-        　　<td><img src="img/dst_img02_poisson.jpg" width="300" height="225"></td>
-        　　<td><img src="img/dst_img02_mvc.jpg" width="300" height="225"></td>
+            <td><img src="img/src_img02.jpg" width="300" height="225"></td>
+            <td><img src="img/mask_img02.jpg" width="300" height="225"></td>
+            <td><img src="img/tar_img02.jpg" width="300" height="225"></td>
+            <td><img src="img/dst_img02_poisson.jpg" width="300" height="225"></td>
+            <td><img src="img/dst_img02_mvc.jpg" width="300" height="225"></td>
         </tr>
-		<tr>
-        　  <td align="center"><img src="img/src_img05.jpg"></td>
-        　　<td align="center"><img src="img/mask_img05.jpg"></td>
-        　　<td><img src="img/tar_img05.jpg" width="300" height="225"></td>
-        　　<td><img src="img/dst_img05_poisson.jpg" width="300" height="225"></td>
-        　　<td><img src="img/dst_img05_mvc.jpg" width="300" height="225"></td>
+		    <tr>
+            <td align="center"><img src="img/src_img05.jpg"></td>
+            <td align="center"><img src="img/mask_img05.jpg"></td>
+            <td><img src="img/tar_img05.jpg" width="300" height="300"></td>
+            <td><img src="img/dst_img05_poisson.jpg" width="300" height="300"></td>
+            <td><img src="img/dst_img05_mvc.jpg" width="300" height="300"></td>
         </tr>
     </table>
     </p>
